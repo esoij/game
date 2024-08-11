@@ -8,6 +8,18 @@ version = project.version
 
 repositories {
     mavenCentral()
+    maven {
+        name = "Deftu Snapshots"
+        url = "https://maven.deftu.dev/snapshots"
+    }
+    maven {
+        name = "Deftu Releases"
+        url = "https://maven.deftu.dev/releases"
+    }
+    maven {
+        name = "GlareMasters Pub Repository"
+        url = "https://repo.glaremasters.me/repository/public/"
+    }
 }
 
 idea {
@@ -20,9 +32,10 @@ idea {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation "org.lwjgl:lwjgl:${lwjglVersion}"
-    implementation "org.lwjgl:lwjgl-glfw:${lwjglVersion}"
-    implementation "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
+    implementation "dev.deftu:componency:${componencyVersion}"
+    implementation "org.l33tlabs.twl:pngdecoder:1.0"
+    implementation "com.mojang:logging:${loggingVersion}"
+    implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
     implementation "org.lwjgl:lwjgl:${lwjglVersion}"
     implementation "org.lwjgl:lwjgl-glfw:${lwjglVersion}"
     implementation "org.lwjgl:lwjgl-opengl:${lwjglVersion}"

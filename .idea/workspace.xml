@@ -4,12 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21f50b3-c751-4097-b5d7-2da7eba8d132" name="Changes" comment="added everything to git">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="e21f50b3-c751-4097-b5d7-2da7eba8d132" name="Changes" comment="stuff">
+      <change afterPath="$PROJECT_DIR$/logs/2024-08-11-1.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/2024-08-11-2.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/2024-08-11-3.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/latest.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/componency/ComponencyEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/componency/InputEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/componency/RenderEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/input/Input.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/input/Keys.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/main/UI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/main/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/util/Texture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/esoij/game/util/Textures.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/game/textures/missing_texture.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/esoij/game/input/InputThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/esoij/game/input/InputThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/esoij/game/SharedConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/esoij/game/SharedConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/esoij/game/input/InputThread.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/esoij/game/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/esoij/game/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/esoij/game/main/MainThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/esoij/game/main/MainThread.java" afterDir="false" />
     </list>
@@ -40,6 +55,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -59,9 +81,17 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Darius\Documents\GitHub\game\src\main\resources\assets\game\textures" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="esoij.game.main.Main" />
@@ -99,12 +129,21 @@
       <option name="project" value="LOCAL" />
       <updated>1723384534763</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="stuff">
+      <option name="closed" value="true" />
+      <created>1723386657580</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723386657580</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="added everything to git" />
-    <option name="LAST_COMMIT_MESSAGE" value="added everything to git" />
+    <MESSAGE value="stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
   </component>
 </project>

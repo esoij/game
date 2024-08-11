@@ -1,29 +1,33 @@
 package esoij.game.main;
 
-import esoij.game.input.InputThread;
+import com.mojang.logging.LogUtils;
+import dev.deftu.componency.engine.InputEngine;
+import dev.deftu.componency.engine.RenderEngine;
+import esoij.game.componency.ComponencyEngine;
+import esoij.game.input.Input;
+import esoij.game.input.Keys;
+import esoij.game.util.Textures;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
-import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.system.MemoryStack;
-
-import java.nio.IntBuffer;
+import org.slf4j.Logger;
 
 import static esoij.game.SharedConstants.IDE;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
-import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class MainThread implements Runnable {
-    public static int WIDTH = 1024;
-    public static int HEIGHT = 768;
-    public static long window;
-    public static int width;
-    public static int height;
-    public FPSAndTPSTimer timer = new FPSAndTPSTimer(60, 60);
-    public static Thread inputThread;
+    public FPSAndTPSTimer timer = new FPSAndTPSTimer(60, FPS);
+    public static double FPS = 60;
+    public Input input = new Input();
+    public Window window = new Window();
+    public static Textures textures = new Textures();
+    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final RenderEngine componencyRenderEngine = new esoij.game.componency.RenderEngine();
+    public static final InputEngine componencyInputEngine = new esoij.game.componency.InputEngine();
+    public static final ComponencyEngine UIEngine = new ComponencyEngine(componencyRenderEngine, componencyInputEngine);
+    public static final UI UI = new UI(UIEngine);
     public void init() {
         if (!glfwInit()) throw new RuntimeException("Unable to initialize GLFW.");
         if (IDE) glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err));
@@ -32,48 +36,38 @@ public class MainThread implements Runnable {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        window = glfwCreateWindow(WIDTH, HEIGHT, "game", NULL, NULL);
-        if (window == NULL) throw new RuntimeException("Failed to create window.");
-        //unsure if having a separate thread for inputs is safe, but who cares. my thinking is that it'll let you send inputs even when the main thread is lagging,
-        //which is very good i think
-        inputThread = new Thread(new InputThread());
-        inputThread.setName("Input Thread");
-        inputThread.start();
-        try (MemoryStack stack = stackPush()) {
-            IntBuffer pWidth = stack.mallocInt(1);
-            IntBuffer pHeight = stack.mallocInt(1);
-            glfwGetWindowSize(window, pWidth, pHeight);
-            GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-            glfwSetWindowPos(window, (vidMode.width() - pWidth.get(0)) / 2, (vidMode.height() - pHeight.get(0)));
-        }
-        glfwSetFramebufferSizeCallback(window, new GLFWFramebufferSizeCallback() {
-            @Override
-            public void invoke(long window, int width, int height) {
-                MainThread.width = width;
-                MainThread.height = height;
-            }
+        this.window.init();
+        glfwSetCursorPosCallback(this.window.window, (window, x, y) -> {
+            UIEngine.updateMousePos((float) x, (float) y);
         });
-        glfwMakeContextCurrent(window);
-        //vsync: glfwSwapInterval(1);
-        glfwShowWindow(window);
     }
     public void loop() {
         GL.createCapabilities();
-        glClearColor(1, 0, 0, 0);
-        while (!glfwWindowShouldClose(window)) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glfwSwapBuffers(window);
+        glClearColor(0, 0, 0, 0);
+        while (!glfwWindowShouldClose(this.window.window)) {
             glfwPollEvents();
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glfwSwapBuffers(this.window.window);
+            UI.render();
             this.timer.advanceTime();
-            System.out.println(this.timer.fps);
+            if (input.isKeyPressed(this.window.window, Keys.ESCAPE)) glfwSetWindowShouldClose(this.window.window, true);
+            //LOGGER.info("FPS: {}", this.timer.fps);
         }
     }
     @Override
     public void run() {
-        init();
-        loop();
-        glfwFreeCallbacks(window);
-        glfwDestroyWindow(window);
+        try {
+            this.init();
+        } catch (Exception e) {
+            LOGGER.error("Could not initialize the game!", e);
+        }
+        try {
+            this.loop();
+        } catch (Exception e) {
+            LOGGER.error("Error in loop!", e);
+        }
+        glfwFreeCallbacks(this.window.window);
+        glfwDestroyWindow(this.window.window);
         glfwTerminate();
         glfwSetErrorCallback(null).free();
     }
