@@ -3,8 +3,8 @@ plugins {
     id "idea"
 }
 
-group = 'esoij'
-version = '1.0-SNAPSHOT'
+group = project.group
+version = project.version
 
 repositories {
     mavenCentral()
